@@ -1,0 +1,11 @@
+/_build
+/build
+/db
+/deps
+/*.ez
+
+erl_crash.dump
+
+/config/*.secret.exs
+.env
+docker-compose.dist-build.yml
