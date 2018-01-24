@@ -1,0 +1,73 @@
+{
+  "id": "/yndphxbootstrap/app",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 256,
+  "disk": 0,
+  "gpus": 0,
+  "cmd": "REPLACE_OS_VARS=true /app/target/bin/ynd_phx_bootstrap foreground",
+  "fetch": [
+    {
+      "uri": "file:///vol/docker.tar.gz",
+      "extract": true,
+      "executable": false,
+      "cache": false
+    }
+  ],
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "ynd/ynd_phx_bootstrap:latest",
+      "network": "BRIDGE",
+      "privileged": false,
+      "forcePullImage": false
+    },
+    "portMappings": [
+      {
+        "containerPort": 4000,
+        "hostPort": 0,
+        "protocol": "tcp",
+        "name": "yndphxbootstrap-app"
+      }
+    ]
+  },
+  "env": {
+    "DB_REPO_USER": "yndphxbootstrap",
+    "DB_REPO_PASSWORD": "yndphxbootstrap",
+    "DB_REPO_NAME": "yndphxbootstrap",
+    "DB_REPO_HOST": "postgres_hostname",
+    "DB_REPO_PORT": "5432",
+    "SENTRY_ENDPOINT": "https://public:secret@app.getsentry.com/1",
+    "GRAYLOG_IP": "127.0.0.1",
+    "GRAYLOG_PORT": "12201",
+    "GRAYLOG_HOST": "yndphxbootstrap-production",
+    "MIX_ENV": "prod",
+    "PORT": "4000"
+  },
+  "healthChecks": [
+    {
+      "portIndex": 0,
+      "protocol": "MESOS_HTTP",
+      "path": "/health"
+    }
+  ],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 1,
+    "maximumOverCapacity": 1
+  },
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 300,
+    "expungeAfterSeconds": 600
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "requirePorts": true,
+  "labels": {
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_VHOST": "yndphxbootstrap.prod.example.com"
+  },
+  "constraints": []
+}

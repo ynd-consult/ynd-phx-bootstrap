@@ -1,0 +1,12 @@
+/_build
+/build/report/junit/*
+!/build/report/junit/.gitkeep
+/db
+/deps
+/*.ez
+
+erl_crash.dump
+
+/config/*.secret.exs
+.env
+docker-compose.dist-build.yml

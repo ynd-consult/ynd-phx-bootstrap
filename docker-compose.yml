@@ -1,0 +1,27 @@
+version: '2'
+services:
+  app:
+    build: .
+    command: mix phx.server
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    env_file: .env
+    # network_mode: host
+    # stdin_open: true
+    # tty: true
+
+  postgres:
+    environment:
+      POSTGRES_USER: ynd_phx_bootstrap
+      POSTGRES_PASSWORD: ynd_phx_bootstrap
+    image: postgres:10.1
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+    driver: local

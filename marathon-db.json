@@ -1,0 +1,54 @@
+{
+  "id": "/yndphxbootstrap/postgres",
+  "cpus": 0.2,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "portMappings": [
+      {
+        "containerPort": 5432,
+        "hostPort": 0,
+        "protocol": "tcp",
+        "name": "yndphxbootstrap-postgres"
+      }
+    ],
+    "type": "DOCKER",
+    "volumes": [
+      {
+        "persistent": {
+          "size": 100
+        },
+        "mode": "RW",
+        "containerPath": "pgdata-yndphxbootstrap"
+      }
+    ],
+    "docker": {
+      "image": "postgres:10.1"
+    }
+  },
+  "env": {
+    "POSTGRES_USER": "yndphxbootstrap",
+    "POSTGRES_PASSWORD": "yndphxbootstrap",
+    "PGDATA": "/mnt/mesos/sandbox/pgdata-yndphxbootstrap"
+  },
+  "healthChecks": [],
+  "upgradeStrategy": {
+    "maximumOverCapacity": 0,
+    "minimumHealthCapacity": 0
+  },
+  "labels": {
+    "HAPROXY_GROUP": "internal"
+  },
+  "residency": {
+    "relaunchEscalationTimeoutSeconds": 10,
+    "taskLostBehavior": "WAIT_FOREVER"
+  },
+  "requirePorts": false,
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "fetch": [],
+  "constraints": []
+}
