@@ -12,6 +12,8 @@ environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :"iXdbeOT43ns241kSXL+ThxDZ7mbL3wdM5Z49E9yqoiLgu8qsOqpyoZ9h19zLkwJ4"
+
+  set post_start_hook: "rel/hooks/post_start"
 end
 
 release :ynd_phx_bootstrap do

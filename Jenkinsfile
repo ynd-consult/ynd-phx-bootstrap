@@ -55,7 +55,7 @@ node ("jenkins-slave") {
   stage('Development build & Syntax Check') {
     sh("cp .env.example .env")
     sh("/usr/local/bin/docker-compose build")
-    sh("/usr/local/bin/docker-compose run --rm app mix do deps.get, credo --strict")
+    sh("/usr/local/bin/docker-compose run --rm app mix do deps.get, compile, credo --strict")
   }
 
   stage('Unit Tests') {
