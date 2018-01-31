@@ -17,5 +17,5 @@ config :ynd_phx_bootstrap, YndPhxBootstrap.Repo,
 
 config :junit_formatter,
   report_file: "report_file_test.xml",
-  report_dir: "build/reports/junit",
+  report_dir: "build/report/junit",
   print_report_file: true
