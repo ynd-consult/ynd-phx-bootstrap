@@ -1,6 +1,6 @@
 /_build
-/build/reports/junit/*
-!/build/reports/junit/.gitkeep
+/build/report/junit/*
+!/build/report/junit/.gitkeep
 /db
 /deps
 /*.ez
