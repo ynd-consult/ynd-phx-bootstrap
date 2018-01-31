@@ -17,7 +17,7 @@
 <div align="center">
   <h3>
     <a href="https://ynd.co">
-      YND Website
+      YND
     </a>
     <span> | </span>
     <a href="http://phoenixframework.org/">
@@ -76,8 +76,9 @@
 
 
 ## Setup
-Setting up the production environment requires some changes in `Jenkinsfile` and `marathon.json` files. Alternatively you would like to alter the `marathon-db.json`
-Required changes in `Jenkinsfile`
+### Jenkinsfile
+Setting up the production environment requires some credentials in jenkins to be setup first. Please check the `Jenkinsfile` included in repo.
+Required changes
 
 * `app_name` give a meaningful name for the app
 * `registry_creds` docker registry credentials
@@ -86,7 +87,9 @@ Required changes in `Jenkinsfile`
 * `marathon_id` marathon application name identifier
 * `dcos_creds` marathon credentials
 
-Required changes in `marathon.json`
+### `marathon.json` and `marathon-db.json`
+We use jenkins config file provider plugin to provide ad hoc build configuration for orchestration platform. We have provided two example files (`marathon.json.example`, `marathon-db.json.example`) to ilustrate how the setup might look like.
+Excerpt of `marathon.json` configuration options
 
 * `id` it should match the `marathon_id` from Jenknisfile
 * `container.docker.image` tag name of docker image you wish to pull from docker registry
@@ -94,7 +97,7 @@ Required changes in `marathon.json`
 * `env` those env variables are accessible in your container and used by binary elixir phoenix release. You probably want to alter all of the variables here except `MIX_ENV` and `PORT`. `SENTRY_ENDPOINT` is also know as sentry dsn.
 * `labels.HAPROXY_0_VHOST`
 
-Changes in `marathon-db.json`
+Excerpt of `marathon-db.json` configuration options
 
 * `id` identifier of the postgresql database service in DC/OS
 * `container.portMappings.name` name of postgresql database service in DC/OS
