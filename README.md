@@ -64,7 +64,7 @@
 - __CI:__ continuous delivery with Jenkins
 - __log management:__ Graylog for log aggregation
 - __error tracking:__ manage errors with Sentry
-- __development setup:__ start coding within minutes - seemles developer experience thanks to Docker & docker-compose
+- __development setup:__ start coding within minutes - seamless developer experience thanks to Docker & docker-compose
 
 ## Prerequisites
 - DC/OS cluster running with marathon-lb plugin enabled
@@ -72,7 +72,7 @@
 - Sentry up and running
 - Graylog up and running
 - Docker registry up and running (or one could use https://hub.docker.com/)
-- Docker & dokcer-compose installed on developer host machine
+- Docker & docker-compose installed on developer host machine
 
 
 ## Setup
