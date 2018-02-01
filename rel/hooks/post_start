@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Running migrations"
+/app/target/bin/ynd_phx_bootstrap rpc Elixir.YndPhxBootstrap.Release.Tasks migrate
