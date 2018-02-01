@@ -1,8 +1,8 @@
 defmodule YndPhxBootstrapWeb.DummyView do
   use YndPhxBootstrapWeb, :view
 
-  def render("echo.json", conn) do
-    conn
-    |> Map.take([:query_params, :request_path])
+  @spec render(binary, map) :: map
+  def render("echo.json", echo_data) do
+    echo_data
   end
 end

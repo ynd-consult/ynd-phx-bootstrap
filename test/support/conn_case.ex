@@ -15,6 +15,8 @@ defmodule YndPhxBootstrapWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  @dialyzer {:nowarn_function, __ex_unit_setup_0: 1}
+
   using do
     quote do
       # Import conveniences for testing with connections

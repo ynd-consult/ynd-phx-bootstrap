@@ -10,6 +10,11 @@ defmodule YndPhxBootstrap.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
+      dialyzer: [
+        plt_add_deps: :transitive,
+        flags: ["-Wunmatched_returns", :error_handling, :race_conditions, :underspecs],
+        ignore_warnings: "dialyzer.ignore-warnings"
+      ],
       deps: deps()
     ]
   end
@@ -35,6 +40,7 @@ defmodule YndPhxBootstrap.Mixfile do
     [
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 0.5.0", only: [:dev, :test], runtime: false},
       {:distillery, "~> 1.5", runtime: false},
       {:gelf_logger, "~> 0.7.3"},
       {:gettext, "~> 0.11"},
