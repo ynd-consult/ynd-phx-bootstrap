@@ -58,6 +58,10 @@ node ("jenkins-slave") {
     sh("/usr/local/bin/docker-compose run --rm app mix do deps.get, compile, credo --strict")
   }
 
+  stage('Type checking') {
+    sh("/usr/local/bin/docker-compose run --rm app mix dialyzer --halt-exit-status --no-compile --no-check")
+  }
+
   stage('Unit Tests') {
     sh("/usr/local/bin/docker-compose run --rm app mix test")
     sh("/usr/local/bin/docker-compose down")

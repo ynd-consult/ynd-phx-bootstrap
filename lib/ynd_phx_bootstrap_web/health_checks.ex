@@ -5,6 +5,7 @@ defmodule YndPhxBootstrapWeb.HealthChecks do
   alias Ecto.Adapters.SQL
   alias YndPhxBootstrap.Repo
 
+  @spec check_ynd_phx_bootstrap_repo() :: :ok | no_return
   def check_ynd_phx_bootstrap_repo do
     %{num_rows: 1, rows: [[1]]} = SQL.query!(Repo, "SELECT 1")
     :ok
