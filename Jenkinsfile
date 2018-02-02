@@ -4,24 +4,43 @@ node ("jenkins-slave") {
   //meaningful app name
   def app_name = "ynd_phx_bootstrap_app"
 
+  def registry_url
+  def registry_creds
+  def dcos_dr_tag
+  def marathon_url
+  def marathon_id
+  def dcos_creds
+
   //docker registry url
-  def registry_url = "private_docker_registry"
+  withCredentials([[$class: 'StringBinding', credentialsId: 'YND_PHX_REGISTRY_URL', variable: 'REGISTRY_URL']]) {
+    registry_url = REGISTRY_URL
+  }
 
   //docker registry password
-  def registry_creds = "secret"
+  withCredentials([[$class: 'StringBinding', credentialsId: 'YND_PHX_REGISTRY_CREDS', variable: 'REGISTRY_CREDS']]) {
+    registry_creds = REGISTRY_CREDS
+  }
 
   //docker registry tag name
-  def dcos_dr_tag = "private_docker_registry_hostname"
+  withCredentials([[$class: 'StringBinding', credentialsId: 'YND_PHX_DCOS_DR', variable: 'TAG']]) {
+    dcos_dr_tag = TAG
+  }
 
   //marathon url
-  def marathon_url = "marathon_url"
+  withCredentials([[$class: 'StringBinding', credentialsId: 'YND_PHX_MARATHON_URL', variable: 'MARATHON_URL']]) {
+    marathon_url = MARATHON_URL
+  }
+
 
   //marathon app id
-  def marathon_id = "/yndphxbootstrap/app"
+  withCredentials([[$class: 'StringBinding', credentialsId: 'YND_PHX_MARATHON_ID', variable: 'MARATHON_ID']]) {
+    marathon_id = MARATHON_ID
+  }
 
   //marathon credentials
-  def dcos_creds = "SECRET_TOKEN"
-
+  withCredentials([[$class: 'StringBinding', credentialsId: 'YND_PHX_DCOS_CREDS', variable: 'DCOS_CREDS']]) {
+    dcos_creds = DCOS_CREDS
+  }
 
   def deployment_result = "STARTED"
   def marathon_json = "marathon.json"
@@ -36,7 +55,7 @@ node ("jenkins-slave") {
   stage('Development build & Syntax Check') {
     sh("cp .env.example .env")
     sh("/usr/local/bin/docker-compose build")
-    sh("/usr/local/bin/docker-compose run --rm app mix do deps.get, credo --strict")
+    sh("/usr/local/bin/docker-compose run --rm app mix do deps.get, compile, credo --strict")
   }
 
   stage('Type checking') {
@@ -51,6 +70,15 @@ node ("jenkins-slave") {
   }
 
   if(isOnDevelop()) {
+    stage("Setup marathon files") {
+      withCredentials([file(credentialsId: 'YND_PHX_MARATHON_JSON', variable: 'MARATHON_JSON')]) {
+        withCredentials([file(credentialsId: 'YND_PHX_MARATHON_DB_JSON', variable: 'MARATHON_DB_JSON')]) {
+          sh("cp \"$MARATHON_JSON\" ./marathon.json")
+          sh("cp \"$MARATHON_DB_JSON\" ./marathon-db.json")
+        }
+      }
+    }
+
     stage("Production build") {
       image = docker.build("${app_name}:${tag}", "-f rel/Dockerfile .")
     }
