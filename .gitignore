@@ -24,3 +24,4 @@ erl_crash.dump
 /config/*.secret.exs
 .env
 docker-compose.dist-build.yml
+.DS_Store

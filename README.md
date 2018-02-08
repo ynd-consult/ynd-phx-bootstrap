@@ -1,54 +1,47 @@
-<h1 align="center">YndPhxBootstrap</h1>
-
-<div align="center">
-  <strong>Production ready, maintainable, fast & scalable template for Elixir Phoenix api server</strong>
-</div>
+[![YND](img/git-header@2x.png)](https://ynd.co)
+[![Elixir Phoenix Bootstrap](img/git-hero@2x.png)](https://medium.com/@ynd/bootstrapping-your-next-elixir-phoenix-project-166b65262aa8)
 
 <br />
 
-<div align="center">
-  <!-- Build Status -->
-  <a href="https://jenkins.io/">
-    <img src="https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/view/Precise/view/All%20Precise/job/precise-desktop-amd64_default.svg"
+[![Twitter](https://img.shields.io/badge/Twitter-@yndconsult-blue.svg?style=flat)](https://twitter.com/yndconsult)
+ <a href="https://Jenkins.io/">
+    <img src="https://img.shields.io/Jenkins/s/https/Jenkins.qa.ubuntu.com/view/Precise/view/All%20Precise/job/precise-desktop-amd64_default.svg"
       alt="Build Status" />
   </a>
-</div>
 
-<div align="center">
-  <h3>
-    <a href="https://ynd.co">
-      YND
-    </a>
-    <span> | </span>
-    <a href="http://phoenixframework.org/">
-      Elixir Phoenix
-    </a>
-    <span> | </span>
-    <a href="https://dcos.io/">
-      DC/OS
-    </a>
-    <span> | </span>
-    <a href="https://mesosphere.github.io/marathon/">
-      Marathon
-    </a>
-    <span> | </span>
-    <a href="https://www.docker.com/">
-      Docker
-    </a>
-    <span> | </span>
-    <a href="https://jenkins.io/">
-      Jenkins
-    </a>
-    <span> | </span>
-    <a href="https://sentry.io/">
-      Sentry
-    </a>
-    <span> | </span>
-    <a href="https://www.graylog.org/">
-      Graylog
-    </a>
-  </h3>
-</div>
+<h3>
+  <a href="https://ynd.co">
+    YND
+  </a>
+  <span> | </span>
+  <a href="http://phoenixframework.org/">
+    Elixir Phoenix
+  </a>
+  <span> | </span>
+  <a href="https://dcos.io/">
+    DC/OS
+  </a>
+  <span> | </span>
+  <a href="https://mesosphere.github.io/marathon/">
+    Marathon
+  </a>
+  <span> | </span>
+  <a href="https://www.docker.com/">
+    Docker
+  </a>
+  <span> | </span>
+  <a href="https://Jenkins.io/">
+    Jenkins
+  </a>
+  <span> | </span>
+  <a href="https://sentry.io/">
+    Sentry
+  </a>
+  <span> | </span>
+  <a href="https://www.graylog.org/">
+    Graylog
+  </a>
+</h3>
 
 ## Table of Contents
 - [Features](#features)
@@ -77,18 +70,21 @@
 
 ## Setup
 ### Jenkinsfile
-Setting up the production environment requires some credentials in jenkins to be setup first. Please check the `Jenkinsfile` included in repo.
-Required changes
+Setting up the production environment requires some credentials in Jenkins to be setup first. Please check the `Jenkinsfile` included in repo.
+Credentials to be added:
 
-* `app_name` give a meaningful name for the app
-* `registry_creds` docker registry credentials
-* `dcos_dr_tag` first part of docker image tag if you are pushing to private docker registry it should point to hostname of your private docker registry
-* `marathon_url` marathon service url
-* `marathon_id` marathon application name identifier
-* `dcos_creds` marathon credentials
+* `YND_PHX_REGISTRY_URL` docker registry URL
+* `YND_PHX_REGISTRY_CREDS` docker registry credentials
+* `YND_PHX_DCOS_DR` first part of docker image tag if you are pushing to private docker registry it should point to hostname of your private docker registry
+* `YND_PHX_MARATHON_URL` marathon service url
+* `YND_PHX_MARATHON_ID` marathon application name identifier
+* `YND_PHX_DCOS_CREDS` marathon credentials
 
 ### `marathon.json` and `marathon-db.json`
-We use jenkins config file provider plugin to provide ad hoc build configuration for orchestration platform. We have provided two example files (`marathon.json.example`, `marathon-db.json.example`) to ilustrate how the setup might look like.
+We use Jenkins config file provider plugin to provide ad hoc build configuration for orchestration platform. We have provided two example files (`marathon.json.example`, `marathon-db.json.example`) to ilustrate how the setup might look like. 
+
+Proper configuration files based on those templates has to be submitted to Jenkins credentials as Secret files, with ids `YND_PHX_MARATHON_JSON` and `YND_PHX_MARATHON_DB_JSON` respectively.
+
 Excerpt of `marathon.json` configuration options
 
 * `id` it should match the `marathon_id` from Jenknisfile
@@ -126,8 +122,15 @@ Run tests
 $ docker-compose run --rm app mix test
 ```
 
-## Support
-Contact us at [hello@ynd.co](mailto:hello@ynd.co)
-
 ## License
-[MIT](https://tldrlegal.com/license/mit-license)
+
+Elixir Phoenix Bootstrap is released under MIT license. See [LICENSE](LICENSE) for details.
+
+## Looking for developers for your project?
+
+[![Contact YND Team](img/git-contact.png)](mailto:hello@ynd.co)
+
+## Follow us
+
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=https://github.com/ynd-consult-ug/ynd-phx-bootstrap)
+[![Twitter Follow](https://img.shields.io/twitter/follow/yndconsult.svg?style=social)](https://twitter.com/yndconsult)
