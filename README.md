@@ -4,10 +4,7 @@
 <br />
 
 [![Twitter](https://img.shields.io/badge/Twitter-@yndconsult-blue.svg?style=flat)](https://twitter.com/yndconsult)
- <a href="https://Jenkins.io/">
-    <img src="https://img.shields.io/Jenkins/s/https/Jenkins.qa.ubuntu.com/view/Precise/view/All%20Precise/job/precise-desktop-amd64_default.svg"
-      alt="Build Status" />
-  </a>
+[![Jenkins](https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/view/Precise/view/All%20Precise/job/precise-desktop-amd64_default.svg)](https://jenkins.io)
 
 <h3>
   <a href="https://ynd.co">
